@@ -9,44 +9,67 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
+	macros {
+               cee_x: {
+               	      label = "cee_x";
+	       	      compatible = "zmk,behavior-macro";
+               	      #binding-cells = <0>;
+               	      bindings
+               	      = <&macro_press &kp LCTRL>
+               	      , <&macro_tap &kp X>
+               	      , <&macro_release &kp LCTRL>
+               	      ;
+               	      };
+		cee_c: {
+               	      label = "cee_c";
+	       	      compatible = "zmk,behavior-macro";
+               	      #binding-cells = <0>;
+               	      bindings
+               	      = <&macro_press &kp LCTRL>
+               	      , <&macro_tap &kp C>
+               	      , <&macro_release &kp LCTRL>
+               	      ;
+               	      };
+        };
+
         keymap {
                 compatible = "zmk,keymap";
 
                 default_layer {
 // -----------------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
+// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | RET  |
 // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
 // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-//                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
+//                    | GUI | SPC | LWR |   | BSPC | RSE  | ALT |
                         label = "Base";
                         bindings = <
-   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                  &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
+   &kp TAB   &kp Q     &kp W      &kp E       &kp R        &kp T   &kp Y        &kp U        &kp I          &kp O         &kp P    &kp RET
+   &kp LCTRL &mt GUI A &mt LALT S &mt LCTRL D &mt LSHIFT F &kp G   &mt LSHIFT H &mt LCTRL J  &mt LALT K     &mt LCTRL L   &kp SEMI &kp SQT
+   &kp LSHFT &kp Z     &kp X      &kp C       &kp V        &kp B   &kp N        &kp M        &kp COMMA      &kp DOT       &kp FSLH &kp ESC
+                                  &kp LGUI    &kp SPACE    &mo 1   &kp BSPC     &mo 2        &kp RALT
                         >;
                 };
                 lower_layer {
 // -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
+// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | RET  |
 // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
+// | SHFT |     | C-x | C-c |     |     |   |     |     |     |     |     |      |
+//                    | GUI |     | SPC |   | BKSP |     | ALT |
                         label = "Lower";
                         bindings = <
    &kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
+   &trans     &trans       &trans       &trans       &trans       &trans         &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
+   &kp LSHFT  &trans       &cee_x       &cee_c       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
                           	        &kp LGUI     &trans       &kp SPACE      &kp RET  &trans   &kp RALT
                         >;
                 };
 
                 raise_layer {
 // -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
+// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | RET  |
 // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
 // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
+//                    | GUI |     | SPC |   | BKSP |     | ALT |
                         label = "Raise";
                         bindings = <
    &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp BSPC
