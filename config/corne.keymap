@@ -10,7 +10,7 @@
 
 / {
 	macros {
-               cee_x: {
+               cee_x: cee_x {
                	      label = "cee_x";
 	       	      compatible = "zmk,behavior-macro";
                	      #binding-cells = <0>;
@@ -20,7 +20,7 @@
                	      , <&macro_release &kp LCTRL>
                	      ;
                	      };
-		cee_c: {
+		cee_c: cee_c {
                	      label = "cee_c";
 	       	      compatible = "zmk,behavior-macro";
                	      #binding-cells = <0>;
